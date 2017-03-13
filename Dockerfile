@@ -22,17 +22,16 @@ RUN pip install -r /requirements.txt
 # for production, do this:
 COPY ./app /app
 # for development, do this instead:
-#VOLUME /app
-
-WORKDIR /app
+# VOLUME /app
 
 # To enable HTTPS, we need to copy certs
 # be sure to create your certs!
-COPY ./etc/ibrest.crt .
-COPY ./etc/ibrest.key .
+COPY ./etc/ibrest.crt /app
+COPY ./etc/ibrest.key /app
 # RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./ibrest.key -out ./ibrest.crt -new -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=www.example.com"
 
-CMD [ "python", "./main.py" ]
+CMD [ "python", "/app/main.py" ]
+
 EXPOSE 443
 
 
